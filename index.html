@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="M.png">
+  <title>For Uu</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka One', cursive;
+      background: linear-gradient(to top right, #ffecd2 0%, #fcb69f 100%);
+      overflow: hidden;
+      text-align: center;
+      color: #333;
+    }
+
+    .typing-container, .yup-container, .birthday-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .typing-box, .yup-box, .birthday-box {
+      background: rgba(255, 255, 255, 0.6);
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: opacity 0.5s;
+    }
+
+    .typing {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #000;
+      animation: typing 2s steps(20, end), blink .7s step-end infinite;
+      font-size: 2em;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: black; }
+    }
+
+    #clickAnywhere {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      font-size: 1.2em;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .bounceIn {
+      animation: bounceIn 0.6s ease-out forwards;
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      50% { transform: scale(1.2); opacity: 1; }
+      70% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+
+    #birthdayContent {
+      display: none;
+    }
+
+    .balloon {
+      width: 60px;
+      height: 80px;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/3468/3468379.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      display: inline-block;
+      margin: 10px;
+      animation: swing 2s infinite ease-in-out;
+    }
+
+    @keyframes swing {
+      0% { transform: rotate(3deg); }
+      50% { transform: rotate(-3deg); }
+      100% { transform: rotate(3deg); }
+    }
+
+    .cake {
+      width: 150px;
+      margin: 20px auto;
+    }
+
+    .cake img {
+      width: 100%;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .pecah {
+      animation: explode .5s forwards;
+    }
+
+    @keyframes explode {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(2); }
+    }
+
+
+    .capybara {
+      width: 100px;
+      margin: 10px auto;
+    }
+
+    #capybara1 {
+  margin-top: 40px;
+  animation: float 1s ease-in-out infinite;
+}
+
+    .birthday-text {
+      font-size: 1.5em;
+      color: #000000;
+      margin-top: 10px;
+    }
+
+    .birthday-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 20px 0;
+}
+
+.balloon-left, .balloon-right {
+  width: 120px;
+  height: 160px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: swing 2s infinite ease-in-out;
+}
+
+.balloon-left {
+  background-image: url('balon1.png'); /* Balon merah */
+}
+
+.balloon-right {
+  background-image: url('balon2.png'); /* Balon biru */
+}
+
+#popperCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="typing-container" id="typingContainer">
+    <div class="typing-box" id="typingBox">
+      <div id="typingText" class="typing">Hari ini hari apa?</div>
+    </div>
+    <div id="capybara1"><img src="CapybaraWhatt.gif" alt="capybara1" width="100px" ></div>
+  </div>
+
+  <div class="yup-container" id="yupContainer" style="display: none;">
+    <div class="yup-box" id="yupBox">
+      <div id="yup">Yup...</div>
+    </div>
+  </div>
+
+  <div id="clickAnywhere">(klik di mana saja)</div>
+
+  <div class="birthday-container" id="birthdayContent">
+    <div class="birthday-box">
+      <div class="birthday-text">Selamat Ulang Tahun yang ke-15, <br> Medinaa 🎉🎂</div>
+
+      <div class="birthday-row">
+  <div class="balloon-left"></div>
+  
+  <div class="cake">
+    <img src="cake.png" alt="Kue Ulang Tahun">
+  </div>
+  
+  <div class="balloon-right"></div>
+</div>
+
+      <div class="capybara">
+        <img src="Capybara Woww.gif" alt="Capybara Imut" width="100">
+      </div>
+    </div>
+  </div>
+
+  <canvas id="popperCanvas" style="position: fixed; top: 0; left: 0; pointer-events: none; display: none; z-index: 999;" ></canvas>
+<audio id="birthdaySound" src="tiupan.mp3"></audio>
+
+
+  <script>
+    let clicked = false;
+
+    document.body.addEventListener('click', () => {
+      if (clicked) return;
+      clicked = true;
+
+      const typing = document.getElementById('typingText');
+      const capybara1 = document.getElementById('capybara1');
+      const typingBox = document.getElementById('typingBox');
+      const typingContainer = document.getElementById('typingContainer');
+      const clickInfo = document.getElementById('clickAnywhere');
+      const yupContainer = document.getElementById('yupContainer');
+      const yup = document.getElementById('yup');
+      const yupBox = document.getElementById('yupBox');
+      const birthdayContent = document.getElementById('birthdayContent');
+
+
+      typing.classList.add('pecah');
+      typingBox.classList.add('pecah');
+        capybara1.classList.add('pecah');
+      clickInfo.style.display = 'none';
+
+      setTimeout(() => {
+        typingContainer.style.display = 'none';
+        yupContainer.style.display = 'flex';
+        yup.classList.add('bounceIn');
+      }, 500);
+
+      setTimeout(() => {
+        yup.classList.remove('bounceIn');
+        yup.classList.add('pecah');
+        yupBox.classList.add('pecah');
+      }, 1500);
+
+      setTimeout(() => {
+        yupContainer.style.display = 'none';
+        birthdayContent.style.display = 'flex';
+      }, 2000);
+    });
+  </script>
+
+  <script>
+  function triggerConfetti() {
+    const canvas = document.getElementById('popperCanvas');
+    const ctx = canvas.getContext('2d');
+    const cake = document.querySelector('.cake');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.display = 'block';
+
+    const rect = cake.getBoundingClientRect();
+    const originX = rect.left + rect.width / 2;
+    const originY = rect.top + rect.height / 2 + window.scrollY; // ⬅️ pakai scroll
+
+    const particles = [];
+
+    for (let i = 0; i < 80; i++) {
+      particles.push({
+        x: originX,
+        y: originY,
+        dx: (Math.random() - 0.5) * 10,
+        dy: (Math.random() - 1) * 10,
+        size: Math.random() * 6 + 4,
+        color: `hsl(${Math.random() * 360}, 100%, 60%)`,
+        life: 100
+      });
+    }
+
+    let animationFrame;
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        p.dy += 0.2;
+        p.life--;
+      });
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        if (particles[i].life <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+
+      if (particles.length > 0) {
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.style.display = 'none';
+        cancelAnimationFrame(animationFrame);
+      }
+    }
+
+    animate();
+  }
+
+  function playBirthdaySound() {
+    const sound = document.getElementById('birthdaySound');
+    if (sound) sound.play();
+  }
+
+  // Pemanggilan saat kue muncul
+  setTimeout(() => {
+  yupContainer.style.display = 'none';
+  birthdayContent.style.display = 'flex';
+
+
+  // Jalankan hanya setelah gambar benar-benar dimuat
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const cakeImg = document.querySelector('.cake img');
+
+      if (cakeImg.complete) {
+        triggerConfetti();
+        playBirthdaySound();
+      } else {
+        cakeImg.addEventListener('load', () => {
+          triggerConfetti();
+          playBirthdaySound();
+        });
+      }
+    });
+  });
+}, 4000);
+
+</script>
+
+
+  
+</body>
+</html>
